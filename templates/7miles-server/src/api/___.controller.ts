@@ -7,7 +7,7 @@ import { HapiController } from "./hapi-controller";
 import * as Joi from '@hapi/joi';
 import * as Boom from "@hapi/boom";
 import { Mapper } from "../helpers/mapper";
-import { I{{capitalize operation_name}}Controller } from './interfaces/{{lowercase operation_name}}.interface';
+import { I{{pascalCase operation_name}}Controller } from './interfaces/{{lowercase operation_name}}.interface';
 import { {{modelsForController operation}} } from '../model/models';
 
 /**
@@ -21,7 +21,7 @@ import { {{modelsForController operation}} } from '../model/models';
  * this case, you can find the missing (added) method(s) in the generated controller and copy the stubs to your implementation.
  */
 @injectable()
-class {{capitalize operation_name}}Controller extends HapiController implements I{{capitalize operation_name}}Controller {
+class {{pascalCase operation_name}}Controller extends HapiController implements I{{pascalCase operation_name}}Controller {
 
   /**
    * Here we are also injecting the car service to manage interactions with the database
@@ -34,7 +34,7 @@ class {{capitalize operation_name}}Controller extends HapiController implements 
       @inject(TYPES.Mapper) private mapper: Mapper)
   {
       super();
-      this.logger.info('Created controller {{capitalize operation_name}}Controller');
+      this.logger.info('Created controller {{pascalCase operation_name}}Controller');
   }
 
 {{#each operation}}
@@ -64,4 +64,4 @@ class {{capitalize operation_name}}Controller extends HapiController implements 
 {{/each}}
 }
 
-export { {{capitalize operation_name}}Controller }
+export { {{pascalCase operation_name}}Controller }
