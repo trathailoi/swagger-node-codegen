@@ -16,7 +16,7 @@
  */
 const CONTROLLER_TYPES = {
   {{#each swagger.endpoints}}
-  {{capitalize this}}Controller: Symbol.for('{{capitalize this}}Controller'),
+  {{pascalCase this}}Controller: Symbol.for('{{pascalCase this}}Controller'),
   {{/each}}
 }
 

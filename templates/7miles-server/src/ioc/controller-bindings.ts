@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 import { TYPES } from './types';
 {{#each swagger.endpoints}}
-import { {{capitalize this}}Controller } from "../api/{{this}}.controller";
+import { {{pascalCase this}}Controller } from "../api/{{this}}.controller";
 {{/each}}
 
 /**
@@ -14,7 +14,7 @@ import { {{capitalize this}}Controller } from "../api/{{this}}.controller";
  */
 function bindControllers(container: Container): void {
   {{#each swagger.endpoints}}
-  container.bind<{{capitalize this}}Controller>(TYPES.{{capitalize this}}Controller).to({{capitalize this}}Controller).inSingletonScope();
+  container.bind<{{pascalCase this}}Controller>(TYPES.{{pascalCase this}}Controller).to({{pascalCase this}}Controller).inSingletonScope();
   {{/each}}
 }
 

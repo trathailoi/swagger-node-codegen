@@ -3,7 +3,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "../ioc/types";
 import { HapiController } from "./hapi-controller";
 {{#each swagger.endpoints}}
-import { {{capitalize this}}Controller } from "./{{this}}.controller";
+import { {{pascalCase this}}Controller } from "./{{this}}.controller";
 {{/each}}
 /**
  * This class is automatically generated from swagger.  It is safe to overwrite an existing file with this one.
@@ -21,8 +21,8 @@ import { {{capitalize this}}Controller } from "./{{this}}.controller";
 @injectable()
 class Controllers {
     {{#each swagger.endpoints}}
-    @inject(TYPES.{{capitalize this}}Controller)
-    private {{capitalize this}}Controller?: {{capitalize this}}Controller;
+    @inject(TYPES.{{pascalCase this}}Controller)
+    private {{pascalCase this}}Controller?: {{pascalCase this}}Controller;
 
     {{/each}}
     /**
