@@ -1,0 +1,1412 @@
+openapi: 3.0.0
+info:
+  description: |
+    A more complex version of the race cars API.
+  version: "1.0.0"
+  title: Race Cars Management
+  contact:
+    email: loi.tra@9thwonder.com
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/loi.tra/my-first-API/1.0.0
+  - description: Please run the app locally on port 8080
+    url: 'http://localhost:8080/api'
+tags:
+  - name: class
+    description: Classes of races and cars
+  - name: address
+    description: Addresses of teams and drivers
+  - name: team
+    description: Teams
+  - name: car
+    description: Cars
+  - name: driver
+    description: Drivers
+  - name: race
+    description: Races
+  - name: race-result
+    description: Race's Results
+
+paths:
+  # Classes
+  /classes:
+    post:
+      tags:
+        - class
+      summary: Add a new class to the system
+      operationId: addClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassFormData'
+        description: form data object that contains fields to update a specific Class
+        required: true
+      responses:
+        default:
+          description: successful operation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Successful operation
+                  data:
+                    $ref: '#/components/schemas/Class'    
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - class
+      summary: Finds Classes # with or w/o conditions
+      description: Finds all the classes
+      # Multiple status values can be provided with comma separated strings
+      operationId: findClasses
+      # parameters:
+      #   - name: limit
+      #     in: query
+      #     description: >-
+      #       Limit the number of cars returned.
+      #       For valid response try integer IDs with value >= 1 and <= 50.\ \ Other
+      #       values will generated exceptions
+      #     required: false
+      #     explode: true
+      #     schema:
+      #       type: integer
+      #       minimum: 1
+      #       maximum: 50
+      #     examples:
+      #       val1:
+      #         value: 1
+      #         summary: A sample min value
+      #       max:
+      #         value: 50
+      #         summary: A sample max value
+      #   - name: offset
+      #     in: query
+      #     description: offset the number of cars returned
+      #     schema:
+      #       type: integer
+      #       format: int32
+      #   - name: sort
+      #     in: query
+      #     description: sort the cars returned
+      #     schema:
+      #       type: string
+      #       default: '-createdAt'
+      #   # - name: status
+      #   #   in: query
+      #   #   description: Status values that need to be considered for filter
+      #   #   # required: true
+      #   #   explode: true
+      #   #   schema:
+      #   #     type: array
+      #   #     items:
+      #   #       type: string
+      #   #       enum:
+      #   #         - all
+      #   #         - active
+      #   #         - inactive
+      #   #         - archived
+      #   #       default: all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Class'
+  '/classes/{id}':
+    get:
+      tags:
+        - class
+      summary: Find class by ID
+      description: Returns a single class
+      operationId: getClassById
+      parameters:
+        - name: id
+          in: path
+          description: ID of class to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - class
+      summary: Updates an existing class by ID
+      operationId: updateClass
+      parameters:
+        - name: id
+          in: path
+          description: ID of the class that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassFormData'
+        description: form data object that contains fields to update a specific Class
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - class
+      summary: Deletes a class by ID
+      # description: >-
+      #   For valid response try integer IDs with positive integer value.\ \
+      #   Negative or non-integer values will generate API errors
+      operationId: deleteClass
+      parameters:
+        - name: id
+          in: path
+          description: Class id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  # Addresses
+  /addresses:
+    post:
+      tags:
+        - address
+      summary: Add a new address to the system
+      operationId: addAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressFormData'
+        description: form data object that contains fields to update a specific address in the system
+      responses:
+        default:
+          description: successful operation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - address
+      summary: Finds Addresses
+      description: Finds all the addresses
+      operationId: findAddresses
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+  '/addresses/{id}':
+    get:
+      tags:
+        - address
+      summary: Find an address by ID
+      description: Returns a single address
+      operationId: getAddressById
+      parameters:
+        - name: id
+          in: path
+          description: ID of address to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - address
+      summary: Updates an existing address by ID
+      operationId: updateAddress
+      parameters:
+        - name: id
+          in: path
+          description: ID of the address that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressFormData'
+        description: form data object that contains fields to update a specific address in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - address
+      summary: Delete an address by ID
+      operationId: deleteAddress
+      parameters:
+        - name: id
+          in: path
+          description: Address id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  # Teams
+  /teams:
+    post:
+      tags:
+        - team
+      summary: Add a new team to the system
+      operationId: addTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamFormData'
+        description: form data object that contains fields to update a specific team in the system
+      responses:
+        default:
+          description: successful operation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - team
+      summary: Finds Teams
+      description: Finds all the teams
+      operationId: findTeams
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamResponse'
+  '/teams/{id}':
+    get:
+      tags:
+        - team
+      summary: Find team by ID
+      description: Returns a single team
+      operationId: getTeamById
+      parameters:
+        - name: id
+          in: path
+          description: ID of team to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamDetailResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - team
+      summary: Updates an existing team by ID
+      operationId: updateTeam
+      parameters:
+        - name: id
+          in: path
+          description: ID of the team that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamFormData'
+        description: form data object that contains fields to update a specific team in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - team
+      summary: Deletes a team by ID
+      operationId: deleteTeam
+      parameters:
+        - name: id
+          in: path
+          description: Team id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  # Drivers
+  /drivers:
+    post:
+      tags:
+        - driver
+      summary: Add a new driver to the system
+      operationId: addDriver
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverFormData'
+        description: form data object that contains fields to update a specific driver in the system
+      responses:
+        default:
+          description: successful operation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - driver
+      summary: Finds Drivers
+      description: Finds all the drivers
+      operationId: findDrivers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DriverResponse'
+  '/drivers/{id}':
+    get:
+      tags:
+        - driver
+      summary: Find driver by ID
+      description: Returns a single driver
+      operationId: getDriverById
+      parameters:
+        - name: id
+          in: path
+          description: ID of driver to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverDetail'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - driver
+      summary: Updates an existing driver by ID
+      operationId: updateDriver
+      parameters:
+        - name: id
+          in: path
+          description: ID of the driver that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverFormData'
+        description: form data object that contains fields to update a specific driver in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriverResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - driver
+      summary: Deletes a driver by ID
+      operationId: deleteDriver
+      parameters:
+        - name: id
+          in: path
+          description: Driver id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+  '/drivers/{id}/results':
+    get:
+      tags:
+        - driver
+        - race-result
+      summary: Get driver's results on races
+      description: Get driver's results on races
+      operationId: getDriverRaceResults
+      parameters:
+        - name: id
+          in: path
+          description: ID of the driver
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+        - name: id
+          in: query
+          description: filter the results by a race id
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+  
+  # Cars
+  /cars:
+    post:
+      tags:
+        - car
+      summary: Add a new car to the system
+      operationId: addCar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarFormData'
+        description: form data object that contains fields to update a specific car in the system
+      responses:
+        default:
+          description: successful operation
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - car
+      summary: Finds Cars
+      description: Finds all the cars
+      operationId: findCars
+      parameters:
+        - name: make
+          in: query
+          description: filter the cars returned by the make
+          schema:
+            type: string
+          examples:
+            example1:
+              value: "Ferrari"
+              summary: "Example #1"
+            example2:
+              value: "McLaren"
+              summary: "Example #2"
+            example3:
+              value: "Renault"
+              summary: "Example #3"
+            example4:
+              value: "Mercedes-Benz"
+              summary: "Example #4"
+            example5:
+              value: "Honda"
+              summary: "Example #5"
+        - name: model
+          in: query
+          description: filter the cars returned by the model
+          schema:
+            type: string
+          examples:
+            example1:
+              value: "Ford Mustang"
+              summary: "Example #1"
+            example2:
+              value: "Honda NSX"
+              summary: "Example #2"
+            example3:
+              value: "Toyota 86"
+              summary: "Example #3"
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarResponse'
+  '/cars/{id}':
+    get:
+      tags:
+        - car
+      summary: Find car by ID
+      description: Returns a single car
+      operationId: getCarById
+      parameters:
+        - name: id
+          in: path
+          description: ID of car to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarDetail'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - car
+      summary: Updates an existing car by ID
+      operationId: updateCar
+      parameters:
+        - name: id
+          in: path
+          description: ID of the car that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarFormData'
+        description: form data object that contains fields to update a specific car in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - car
+      summary: Deletes a car by ID
+      operationId: deleteCar
+      parameters:
+        - name: id
+          in: path
+          description: Car id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+  '/cars/{id}/results':
+    get:
+      tags:
+        - car
+        - race-result
+      summary: Get a car's results
+      description: Get a car's results
+      operationId: getCarResults
+      parameters:
+        - name: id
+          in: path
+          description: ID of the car
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+        - name: id
+          in: query
+          description: filter the results by a race id
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  # Races
+  /races:
+    post:
+      tags:
+        - race
+        - race-result
+      summary: Add a new race (with its results) to the system
+      operationId: addRace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatingRaceFormData'
+        description: You can add a new race to the system, as well as its results at once. The "results" field is optional.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Race'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    get:
+      tags:
+        - race
+      summary: Finds Races
+      description: Finds all the races
+      operationId: findRaces
+      parameters:
+        - name: car
+          in: query
+          description: filter the races returned by car id
+          schema:
+            type: string
+          examples:
+            example1:
+              value: "12345678-abcd-ef12–345a-12345678abcd"
+              summary: "Example #1"
+            example2:
+              value: "5f36215d-f5c6-4896-087c-f30f3678f607"
+              summary: "Example #2"
+        - name: driver
+          in: query
+          description: filter the races returned by the driver id
+          schema:
+            type: string
+          examples:
+            example1:
+              value: "12345678-abcd-ef12–345a-12345678abcd"
+              summary: "Example #1"
+            example2:
+              value: "5f36215d-f5c6-4896-087c-f30f3678f607"
+              summary: "Example #2"
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Race'
+  '/races/{id}':
+    get:
+      tags:
+        - race
+      summary: Find race by ID
+      description: Returns a single race
+      operationId: getRaceById
+      parameters:
+        - name: id
+          in: path
+          description: ID of race to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaceResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    patch:
+      tags:
+        - race
+      summary: Updates an existing race by ID
+      operationId: updateRace
+      parameters:
+        - name: id
+          in: path
+          description: ID of the race that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RaceFormData'
+        description: form data object that contains fields to update a specific race in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaceResponse'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - race
+      summary: Deletes a race by ID
+      operationId: deleteRace
+      parameters:
+        - name: id
+          in: path
+          description: Race id to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+  '/races/{id}/results':
+    get:
+      tags:
+        - race
+        - race-result
+      summary: Get a race's results
+      description: Get a race's results
+      operationId: getRaceResults
+      parameters:
+        - name: id
+          in: path
+          description: ID of the race
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+        - name: id
+          in: query
+          description: get results for a specific class on the race
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    put:
+      tags:
+        - race
+        - race-result
+      summary: Add new race results for an existing race
+      operationId: addRaceResult
+      parameters:
+        - name: id
+          in: path
+          description: ID of the race
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/RaceResultFormData'
+        description: A results array. Each element is a result object.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  '/races/{id}/results/{raceResultId}':
+    patch:
+      tags:
+        - race
+        - race-result
+      summary: Updates an existing race result
+      operationId: updateRaceResult
+      parameters:
+        - name: id
+          in: path
+          description: ID of the race
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+        - name: raceResultId
+          in: path
+          description: ID of the result that needs to be updated
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RaceResultFormData'
+        description: form data object that contains fields to update a specific race result in the system
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  # RaceResults
+  '/race-results/{id}':
+    get:
+      tags:
+        - race-result
+      summary: Get a result detail by ID
+      description: Get a result detail by ID
+      operationId: getRaceResultById
+      parameters:
+        - name: id
+          in: path
+          description: ID of a race result
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaceResultRespone'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - race-result
+      summary: Delete a race result by ID
+      operationId: deleteRaceResult
+      parameters:
+        - name: id
+          in: path
+          description: race result ID to delete
+          required: true
+          schema:
+            $ref: '#/components/schemas/uuidFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Success'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+
+components:
+  schemas:
+    ClassFormData: # Can be referenced as '#/components/schemas/ClassFormData'
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: GTE-Pro
+    Class: # Can be referenced as '#/components/schemas/Class'
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/uuidFormat'
+        - $ref: '#/components/schemas/ClassFormData'
+
+
+    AddressFormData: # Can be referenced as '#/components/schemas/AddressFormData'
+      type: object
+      required:
+        - name
+        - city
+        - state
+        - zip
+        - country
+      properties:
+        name:
+          type: string
+          example: Team A's headquarter
+        street:
+          type: string
+          example: PO BOX 21345
+        street2:
+          type: string
+          example: Street 2
+        city:
+          type: string
+          example: COLLEGE PLACE
+        state:
+          type: string
+          example: WASHINGTON
+        zip:
+          type: string
+          example: "21345"
+        country:
+          type: string
+          example: UNITED STATES
+    Address: # Can be referenced as '#/components/schemas/Address'
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/uuidFormat'
+        - $ref: '#/components/schemas/AddressFormData'
+
+
+    TeamFormData: # Can be referenced as '#/components/schemas/TeamFormData'
+      type: object
+      required:
+        - name
+        - nationality
+      properties:
+        name:
+          type: string
+          example: The Quicksilver
+        nationality:
+          type: string
+          enum: [USA, VietNam]
+          example: USA
+        businessAddress:
+          $ref: '#/components/schemas/uuidFormat'
+    Team: # Can be referenced as '#/components/schemas/Team'
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/uuidFormat'
+        - $ref: '#/components/schemas/TeamFormData'
+    TeamResponse: # Can be referenced as '#/components/schemas/TeamResponse'
+      type: object
+      required:
+        - name
+        - nationality
+      properties:
+        id:
+          $ref: '#/components/schemas/uuidFormat'
+        name:
+          type: string
+          example: The Quicksilver
+        nationality:
+          type: string
+          enum: [USA, VietNam]
+          example: USA
+        businessAddress:
+          $ref: '#/components/schemas/Address'
+    TeamDetailResponse: # Can be referenced as '#/components/schemas/TeamDetailResponse'
+      allOf:
+        - $ref: '#/components/schemas/TeamResponse'
+        - type: object
+          properties:
+            ownedCars:
+              type: array
+              items:
+                $ref: '#/components/schemas/CarResponse'
+
+    DriverFormData: # Can be referenced as '#/components/schemas/DriverFormData'
+      type: object
+      required:
+        - firstName
+        - lastName
+        - nationality
+        - team
+      properties:
+        firstName:
+          type: string
+          example: Barry
+        lastName:
+          type: string
+          example: Allen
+        nationality:
+          type: string
+          enum: [USA, VietNam]
+          example: USA
+        team:
+          $ref: '#/components/schemas/uuidFormat'
+        homeAddress:
+          $ref: '#/components/schemas/uuidFormat'
+        managementAddress:
+          $ref: '#/components/schemas/uuidFormat'
+    Driver: # Can be referenced as '#/components/schemas/Driver'
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/uuidFormat'
+        - $ref: '#/components/schemas/DriverFormData'
+    DriverResponse: # Can be referenced as '#/components/schemas/DriverResponse'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/uuidFormat'
+        firstName:
+          type: string
+          example: Barry
+        lastName:
+          type: string
+          example: Allen
+        nationality:
+          type: string
+          enum: [USA, VietNam]
+          example: USA
+        team:
+          $ref: '#/components/schemas/TeamResponse'
+        homeAddress:
+          $ref: '#/components/schemas/Address'
+        managementAddress:
+          $ref: '#/components/schemas/Address'
+    DriverDetail: # Can be referenced as '#/components/schemas/DriverDetail'
+      allOf:
+        - $ref: '#/components/schemas/DriverResponse'
+        - type: object
+          properties:
+            cars:
+              $ref: '#/components/schemas/CarResponse'
+
+
+    CarFormData: # Can be referenced as '#/components/schemas/CarFormData'
+      type: object
+      required:
+        - name
+        - team
+        - make
+        - model
+        - class
+      properties:
+        name:
+          type: string
+          example: A random car's name
+        team:
+          $ref: '#/components/schemas/uuidFormat'
+        make:
+          type: string
+          example: Ferrari
+        model:
+          type: string
+          example: 488 GTE-LM
+        class:
+          type: string
+          format: uuid
+          example: 12345678-abcd-ef12–345a-12345678abcd
+    CarResponse: # Can be referenced as '#/components/schemas/CarResponse'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/uuidFormat'
+        name:
+          type: string
+          example: A random car's name
+        team:
+          $ref: '#/components/schemas/Team'
+        make:
+          type: string
+          example: Ferrari
+        model:
+          type: string
+          example: 488 GTE-LM
+        class:
+          $ref: '#/components/schemas/Class'
+    CarDetail: # Can be referenced as '#/components/schemas/CarDetail'
+      allOf:
+        - $ref: '#/components/schemas/CarResponse'
+        - type: object
+          properties:
+            drivers:
+              $ref: '#/components/schemas/DriverResponse'
+
+
+    RaceFormData: # Can be referenced as '#/components/schemas/RaceFormData'
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: Le Mans
+    CreatingRaceFormData: # Can be referenced as '#/components/schemas/CreatingRaceFormData'
+      allOf:
+        - $ref: '#/components/schemas/RaceFormData'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/RaceResultFormData'
+    Race: # Can be referenced as '#/components/schemas/Race'
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/uuidFormat'
+        - $ref: '#/components/schemas/RaceFormData'
+    RaceResponse: # Can be referenced as '#/components/schemas/RaceResponse'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/uuidFormat'
+        name:
+          type: string
+          example: Le Mans
+        classes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Class'
+
+    RaceResultFormData: # Can be referenced as '#/components/schemas/RaceResultFormData'
+      type: object
+      required:
+        - car
+        - carNumber
+        - driver
+        - class
+        - startPosition
+      properties:
+        car:
+          $ref: '#/components/schemas/uuidFormat'
+        carNumber:
+          type: integer
+          example: 1
+        driver:
+          $ref: '#/components/schemas/uuidFormat'
+        class:
+          $ref: '#/components/schemas/uuidFormat'
+        startPosition:
+          type: integer
+          format: int32
+          example: 15
+        isFinished:
+          type: boolean
+          example: true
+        finishPosition:
+          type: integer
+          format: int32
+          example: 3
+    RaceResultRespone: # Can be referenced as '#/components/schemas/RaceResultRespone'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/uuidFormat'
+        car:
+          $ref: '#/components/schemas/CarResponse'
+        carNumber:
+          type: integer
+          example: 1
+        race:
+          $ref: '#/components/schemas/Race'
+        driver:
+          $ref: '#/components/schemas/Driver'
+        class:
+          $ref: '#/components/schemas/Class'
+        startPosition:
+          type: integer
+          example: 15
+        isFinished:
+          type: boolean
+          example: true
+        finishPosition:
+          type: integer
+          example: 3
+
+    uuidFormat: # Can be referenced as '#/components/schemas/uuidFormat'
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      example: 5f36215d-f5c6-4896-087c-f30f3678f607
+
+  responses:
+    200Success: # Can be referenced as '#/components/responses/200'
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                example: 200
+              message:
+                type: string
+                example: Successful operation
+    404NotFound: # Can be referenced as '#/components/responses/404NotFound'
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                example: 404
+              error:
+                type: string
+                example: Not Found
+              message:
+                type: string
+                example: Not Found
+    400BadRequest: # Can be referenced as '#/components/responses/400BadRequest'
+      description: Invalid input supplied.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                example: 400
+              error:
+                type: string
+                example: Bad Request
+              message:
+                type: string
+                example: '"name" is required'

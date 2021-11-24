@@ -16,7 +16,10 @@
  */
 const CONTROLLER_TYPES = {
   {{#each swagger.endpoints}}
+  {{pascalCase this}}Repository: Symbol.for('{{pascalCase this}}Repository'),
+  {{pascalCase this}}Service: Symbol.for('{{pascalCase this}}Service'),
   {{pascalCase this}}Controller: Symbol.for('{{pascalCase this}}Controller'),
+
   {{/each}}
 }
 

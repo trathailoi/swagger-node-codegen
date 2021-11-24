@@ -1,7 +1,11 @@
 import { Container } from 'inversify';
 import { TYPES } from './types';
+
 {{#each swagger.endpoints}}
-import { {{pascalCase this}}Controller } from "../api/{{this}}.controller";
+import { {{pascalCase this}} } from '../entity/{{lowercase this}}';
+import { {{pascalCase this}}Service } from '../service/{{lowercase this}}.service';
+import { {{pascalCase this}}Controller } from '../api/{{lowercase this}}.controller';
+
 {{/each}}
 
 /**
@@ -14,7 +18,10 @@ import { {{pascalCase this}}Controller } from "../api/{{this}}.controller";
  */
 function bindControllers(container: Container): void {
   {{#each swagger.endpoints}}
+  container.bind<Repository<{{pascalCase this}}>>(TYPES.{{pascalCase this}}Repository).toDynamicValue(() => createRepository<{{pascalCase this}}>({{pascalCase this}})).inSingletonScope()
+  container.bind<{{pascalCase this}}Service>(TYPES.{{pascalCase this}}Service).to({{pascalCase this}}Service).inSingletonScope();
   container.bind<{{pascalCase this}}Controller>(TYPES.{{pascalCase this}}Controller).to({{pascalCase this}}Controller).inSingletonScope();
+
   {{/each}}
 }
 
