@@ -1,10 +1,10 @@
-import { Container } from 'inversify';
-import { TYPES } from './types';
+import { Container } from 'inversify'
+import { TYPES } from './types'
 
 {{#each swagger.endpoints}}
-import { {{pascalCase this}} } from '../entity/{{lowercase this}}';
-import { {{pascalCase this}}Service } from '../service/{{lowercase this}}.service';
-import { {{pascalCase this}}Controller } from '../api/{{lowercase this}}.controller';
+import { {{pascalCase this}} } from '../entity/{{lowercase this}}'
+import { {{pascalCase this}}Service } from '../service/{{lowercase this}}.service'
+import { {{pascalCase this}}Controller } from '../api/{{lowercase this}}.controller'
 
 {{/each}}
 
@@ -13,14 +13,14 @@ import { {{pascalCase this}}Controller } from '../api/{{lowercase this}}.control
  *
  * To use this file, import it into ioc.ts and add the following line to your controller binding section:
  *
- * bindControllers(container);
+ * bindControllers(container)
  *
  */
 function bindControllers(container: Container): void {
   {{#each swagger.endpoints}}
   container.bind<Repository<{{pascalCase this}}>>(TYPES.{{pascalCase this}}Repository).toDynamicValue(() => createRepository<{{pascalCase this}}>({{pascalCase this}})).inSingletonScope()
-  container.bind<{{pascalCase this}}Service>(TYPES.{{pascalCase this}}Service).to({{pascalCase this}}Service).inSingletonScope();
-  container.bind<{{pascalCase this}}Controller>(TYPES.{{pascalCase this}}Controller).to({{pascalCase this}}Controller).inSingletonScope();
+  container.bind<{{pascalCase this}}Service>(TYPES.{{pascalCase this}}Service).to({{pascalCase this}}Service).inSingletonScope()
+  container.bind<{{pascalCase this}}Controller>(TYPES.{{pascalCase this}}Controller).to({{pascalCase this}}Controller).inSingletonScope()
 
   {{/each}}
 }

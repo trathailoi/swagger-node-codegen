@@ -1,5 +1,5 @@
 {{#each swagger.components.schemas}}
-import { {{@key}}Model } from './{{@key}}.model.ts';
+import { {{@key}}Model } from './{{@key}}.model.ts'
 {{/each}}
 
 /**

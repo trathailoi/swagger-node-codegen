@@ -11,8 +11,8 @@ class {{pascalCase operation_name}}Service extends CrudService<{{pascalCase oper
     @inject(TYPES.{{pascalCase operation_name}}Repository) repository: Repository<{{pascalCase operation_name}}>,
     @inject(TYPES.Logger) logger: Logger
   ) {
-    super(repository, logger);
-    this.logger.info('Created {{pascalCase operation_name}}Service');
+    super(repository, logger)
+    this.logger.info('Created {{pascalCase operation_name}}Service')
   }
 }
 
