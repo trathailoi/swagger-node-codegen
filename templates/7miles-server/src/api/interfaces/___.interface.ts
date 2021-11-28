@@ -19,7 +19,7 @@ interface I{{pascalCase operation_name}}Controller {
  * {{{this}}}
  {{/each}}
  */
-  public async {{../operationId}}(request: Request, toolkit: ResponseToolkit)
+  {{../operationId}}(request: Request, toolkit: ResponseToolkit) : Promise<any>
 
     {{/validMethod}}
   {{/each}}
@@ -33,7 +33,7 @@ interface I{{pascalCase operation_name}}Controller {
   * {{{this}}}
   {{/each}}
   */
-  public async {{../operationId}}(request: Request, toolkit: ResponseToolkit)
+  {{../operationId}}(request: Request, toolkit: ResponseToolkit) : Promise<any>
 
     {{/validMethod}}
   {{/each}}

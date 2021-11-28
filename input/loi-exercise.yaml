@@ -44,23 +44,12 @@ paths:
         description: form data object that contains fields to update a specific Class
         required: true
       responses:
-        default:
-          description: successful operation
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: Successful operation
-                  data:
-                    $ref: '#/components/schemas/Class'    
+                $ref: '#/components/schemas/Class'
         '400':
           $ref: '#/components/responses/400BadRequest'
     get:
@@ -119,7 +108,7 @@ paths:
       #   #       default: all
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -142,7 +131,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -171,12 +160,8 @@ paths:
         description: form data object that contains fields to update a specific Class
         required: true
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Class'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -197,8 +182,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -218,10 +203,8 @@ paths:
               $ref: '#/components/schemas/AddressFormData'
         description: form data object that contains fields to update a specific address in the system
       responses:
-        default:
-          description: successful operation
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -236,7 +219,7 @@ paths:
       operationId: findAddresses
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -259,7 +242,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -287,12 +270,8 @@ paths:
               $ref: '#/components/schemas/AddressFormData'
         description: form data object that contains fields to update a specific address in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -310,8 +289,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -331,10 +310,8 @@ paths:
               $ref: '#/components/schemas/TeamFormData'
         description: form data object that contains fields to update a specific team in the system
       responses:
-        default:
-          description: successful operation
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -349,7 +326,7 @@ paths:
       operationId: findTeams
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -372,7 +349,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -400,12 +377,8 @@ paths:
               $ref: '#/components/schemas/TeamFormData'
         description: form data object that contains fields to update a specific team in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TeamResponse'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -423,8 +396,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -444,10 +417,8 @@ paths:
               $ref: '#/components/schemas/DriverFormData'
         description: form data object that contains fields to update a specific driver in the system
       responses:
-        default:
-          description: successful operation
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -462,7 +433,7 @@ paths:
       operationId: findDrivers
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -485,7 +456,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -513,12 +484,8 @@ paths:
               $ref: '#/components/schemas/DriverFormData'
         description: form data object that contains fields to update a specific driver in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DriverResponse'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -536,8 +503,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -557,14 +524,14 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/uuidFormat'
-        - name: id
+        - name: carId
           in: query
           description: filter the results by a race id
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -590,10 +557,8 @@ paths:
               $ref: '#/components/schemas/CarFormData'
         description: form data object that contains fields to update a specific car in the system
       responses:
-        default:
-          description: successful operation
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -645,7 +610,7 @@ paths:
               summary: "Example #3"
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -668,7 +633,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -696,12 +661,8 @@ paths:
               $ref: '#/components/schemas/CarFormData'
         description: form data object that contains fields to update a specific car in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CarResponse'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -719,8 +680,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -740,14 +701,14 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/uuidFormat'
-        - name: id
+        - name: raceId
           in: query
           description: filter the results by a race id
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -774,8 +735,8 @@ paths:
               $ref: '#/components/schemas/CreatingRaceFormData'
         description: You can add a new race to the system, as well as its results at once. The "results" field is optional.
       responses:
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -815,7 +776,7 @@ paths:
               summary: "Example #2"
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -838,7 +799,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -866,12 +827,8 @@ paths:
               $ref: '#/components/schemas/RaceFormData'
         description: form data object that contains fields to update a specific race in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaceResponse'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -889,8 +846,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -910,14 +867,14 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/uuidFormat'
-        - name: id
+        - name: classId
           in: query
           description: get results for a specific class on the race
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -951,7 +908,7 @@ paths:
         description: A results array. Each element is a result object.
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -988,12 +945,8 @@ paths:
               $ref: '#/components/schemas/RaceResultFormData'
         description: form data object that contains fields to update a specific race result in the system
       responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaceResultRespone'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -1016,7 +969,7 @@ paths:
             $ref: '#/components/schemas/uuidFormat'
       responses:
         '200':
-          description: successful operation
+          description: OK
           content:
             application/json:
               schema:
@@ -1038,8 +991,8 @@ paths:
           schema:
             $ref: '#/components/schemas/uuidFormat'
       responses:
-        '200':
-          $ref: '#/components/responses/200Success'
+        '204':
+          $ref: '#/components/responses/204NoContent'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -1158,8 +1111,6 @@ components:
       required:
         - firstName
         - lastName
-        - nationality
-        - team
       properties:
         firstName:
           type: string
@@ -1171,8 +1122,10 @@ components:
           type: string
           enum: [USA, VietNam]
           example: USA
-        team:
-          $ref: '#/components/schemas/uuidFormat'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/uuidFormat'
         homeAddress:
           $ref: '#/components/schemas/uuidFormat'
         managementAddress:
@@ -1218,9 +1171,9 @@ components:
       type: object
       required:
         - name
-        - team
         - make
         - model
+        - team
         - class
       properties:
         name:
@@ -1365,21 +1318,10 @@ components:
       example: 5f36215d-f5c6-4896-087c-f30f3678f607
 
   responses:
-    200Success: # Can be referenced as '#/components/responses/200'
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              statusCode:
-                type: integer
-                example: 200
-              message:
-                type: string
-                example: Successful operation
+    204NoContent: # Can be referenced as '#/components/responses/204NoContent'
+      description: No Content
     404NotFound: # Can be referenced as '#/components/responses/404NotFound'
-      description: The specified resource was not found.
+      description: Not found. The resource was not found.
       content:
         application/json:
           schema:
@@ -1395,7 +1337,7 @@ components:
                 type: string
                 example: Not Found
     400BadRequest: # Can be referenced as '#/components/responses/400BadRequest'
-      description: Invalid input supplied.
+      description: Bad request. Invalid input supplied.
       content:
         application/json:
           schema:
