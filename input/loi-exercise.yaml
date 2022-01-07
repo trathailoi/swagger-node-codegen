@@ -35,12 +35,12 @@ paths:
       tags:
         - class
       summary: Add a new class to the system
-      operationId: addClass
+      operationId: create_Class
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClassFormData'
+              $ref: '#/components/schemas/Class_Dto'
         description: form data object that contains fields to update a specific Class
         required: true
       responses:
@@ -58,7 +58,7 @@ paths:
       summary: Finds Classes # with or w/o conditions
       description: Finds all the classes
       # Multiple status values can be provided with comma separated strings
-      operationId: findClasses
+      operationId: findAll_Class
       # parameters:
       #   - name: limit
       #     in: query
@@ -121,14 +121,14 @@ paths:
         - class
       summary: Find class by ID
       description: Returns a single class
-      operationId: getClassById
+      operationId: findOne_Class
       parameters:
         - name: id
           in: path
           description: ID of class to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -144,19 +144,19 @@ paths:
       tags:
         - class
       summary: Updates an existing class by ID
-      operationId: updateClass
+      operationId: update_Class
       parameters:
         - name: id
           in: path
           description: ID of the class that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClassFormData'
+              $ref: '#/components/schemas/Class_Dto'
         description: form data object that contains fields to update a specific Class
         required: true
       responses:
@@ -173,14 +173,14 @@ paths:
       # description: >-
       #   For valid response try integer IDs with positive integer value.\ \
       #   Negative or non-integer values will generate API errors
-      operationId: deleteClass
+      operationId: delete_Class
       parameters:
         - name: id
           in: path
           description: Class id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -195,12 +195,12 @@ paths:
       tags:
         - address
       summary: Add a new address to the system
-      operationId: addAddress
+      operationId: create_Address
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddressFormData'
+              $ref: '#/components/schemas/Address_Dto'
         description: form data object that contains fields to update a specific address in the system
       responses:
         '201':
@@ -216,7 +216,7 @@ paths:
         - address
       summary: Finds Addresses
       description: Finds all the addresses
-      operationId: findAddresses
+      operationId: findAll_Address
       responses:
         '200':
           description: OK
@@ -232,14 +232,14 @@ paths:
         - address
       summary: Find an address by ID
       description: Returns a single address
-      operationId: getAddressById
+      operationId: findOne_Address
       parameters:
         - name: id
           in: path
           description: ID of address to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -255,19 +255,19 @@ paths:
       tags:
         - address
       summary: Updates an existing address by ID
-      operationId: updateAddress
+      operationId: update_Address
       parameters:
         - name: id
           in: path
           description: ID of the address that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddressFormData'
+              $ref: '#/components/schemas/Address_Dto'
         description: form data object that contains fields to update a specific address in the system
       responses:
         '204':
@@ -280,14 +280,14 @@ paths:
       tags:
         - address
       summary: Delete an address by ID
-      operationId: deleteAddress
+      operationId: delete_Address
       parameters:
         - name: id
           in: path
           description: Address id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -302,12 +302,12 @@ paths:
       tags:
         - team
       summary: Add a new team to the system
-      operationId: addTeam
+      operationId: create_Team
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TeamFormData'
+              $ref: '#/components/schemas/Team_Dto'
         description: form data object that contains fields to update a specific team in the system
       responses:
         '201':
@@ -323,7 +323,7 @@ paths:
         - team
       summary: Finds Teams
       description: Finds all the teams
-      operationId: findTeams
+      operationId: findAll_Team
       responses:
         '200':
           description: OK
@@ -339,14 +339,14 @@ paths:
         - team
       summary: Find team by ID
       description: Returns a single team
-      operationId: getTeamById
+      operationId: findOne_Team
       parameters:
         - name: id
           in: path
           description: ID of team to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -362,19 +362,19 @@ paths:
       tags:
         - team
       summary: Updates an existing team by ID
-      operationId: updateTeam
+      operationId: update_Team
       parameters:
         - name: id
           in: path
           description: ID of the team that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TeamFormData'
+              $ref: '#/components/schemas/Team_Dto'
         description: form data object that contains fields to update a specific team in the system
       responses:
         '204':
@@ -387,14 +387,14 @@ paths:
       tags:
         - team
       summary: Deletes a team by ID
-      operationId: deleteTeam
+      operationId: delete_Team
       parameters:
         - name: id
           in: path
           description: Team id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -409,12 +409,12 @@ paths:
       tags:
         - driver
       summary: Add a new driver to the system
-      operationId: addDriver
+      operationId: create_Driver
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverFormData'
+              $ref: '#/components/schemas/Driver_Dto'
         description: form data object that contains fields to update a specific driver in the system
       responses:
         '201':
@@ -430,7 +430,7 @@ paths:
         - driver
       summary: Finds Drivers
       description: Finds all the drivers
-      operationId: findDrivers
+      operationId: findAll_Driver
       responses:
         '200':
           description: OK
@@ -446,14 +446,14 @@ paths:
         - driver
       summary: Find driver by ID
       description: Returns a single driver
-      operationId: getDriverById
+      operationId: findOne_Driver
       parameters:
         - name: id
           in: path
           description: ID of driver to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -469,19 +469,19 @@ paths:
       tags:
         - driver
       summary: Updates an existing driver by ID
-      operationId: updateDriver
+      operationId: update_Driver
       parameters:
         - name: id
           in: path
           description: ID of the driver that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DriverFormData'
+              $ref: '#/components/schemas/Driver_Dto'
         description: form data object that contains fields to update a specific driver in the system
       responses:
         '204':
@@ -494,14 +494,14 @@ paths:
       tags:
         - driver
       summary: Deletes a driver by ID
-      operationId: deleteDriver
+      operationId: delete_Driver
       parameters:
         - name: id
           in: path
           description: Driver id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -516,19 +516,19 @@ paths:
         - race-result
       summary: Get driver's results on races
       description: Get driver's results on races
-      operationId: getDriverRaceResults
+      operationId: getResults_Driver
       parameters:
         - name: id
           in: path
           description: ID of the driver
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
         - name: carId
           in: query
           description: filter the results by a race id
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -537,7 +537,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/RaceResultRespone'
+                  $ref: '#/components/schemas/RaceResultResponse'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -549,12 +549,12 @@ paths:
       tags:
         - car
       summary: Add a new car to the system
-      operationId: addCar
+      operationId: create_Car
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CarFormData'
+              $ref: '#/components/schemas/Car_Dto'
         description: form data object that contains fields to update a specific car in the system
       responses:
         '201':
@@ -570,7 +570,7 @@ paths:
         - car
       summary: Finds Cars
       description: Finds all the cars
-      operationId: findCars
+      operationId: findAll_Car
       parameters:
         - name: make
           in: query
@@ -623,14 +623,14 @@ paths:
         - car
       summary: Find car by ID
       description: Returns a single car
-      operationId: getCarById
+      operationId: findOne_Car
       parameters:
         - name: id
           in: path
           description: ID of car to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -646,19 +646,19 @@ paths:
       tags:
         - car
       summary: Updates an existing car by ID
-      operationId: updateCar
+      operationId: update_Car
       parameters:
         - name: id
           in: path
           description: ID of the car that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CarFormData'
+              $ref: '#/components/schemas/Car_Dto'
         description: form data object that contains fields to update a specific car in the system
       responses:
         '204':
@@ -671,14 +671,14 @@ paths:
       tags:
         - car
       summary: Deletes a car by ID
-      operationId: deleteCar
+      operationId: delete_Car
       parameters:
         - name: id
           in: path
           description: Car id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -693,19 +693,19 @@ paths:
         - race-result
       summary: Get a car's results
       description: Get a car's results
-      operationId: getCarResults
+      operationId: getResults_Car
       parameters:
         - name: id
           in: path
           description: ID of the car
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
         - name: raceId
           in: query
           description: filter the results by a race id
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -714,7 +714,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/RaceResultRespone'
+                  $ref: '#/components/schemas/RaceResultResponse'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -727,12 +727,12 @@ paths:
         - race
         - race-result
       summary: Add a new race (with its results) to the system
-      operationId: addRace
+      operationId: create_Race
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatingRaceFormData'
+              $ref: '#/components/schemas/Create_Race_Dto'
         description: You can add a new race to the system, as well as its results at once. The "results" field is optional.
       responses:
         '201':
@@ -748,7 +748,7 @@ paths:
         - race
       summary: Finds Races
       description: Finds all the races
-      operationId: findRaces
+      operationId: findAll_Race
       parameters:
         - name: car
           in: query
@@ -789,14 +789,14 @@ paths:
         - race
       summary: Find race by ID
       description: Returns a single race
-      operationId: getRaceById
+      operationId: findOne_Race
       parameters:
         - name: id
           in: path
           description: ID of race to return
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -812,19 +812,19 @@ paths:
       tags:
         - race
       summary: Updates an existing race by ID
-      operationId: updateRace
+      operationId: update_Race
       parameters:
         - name: id
           in: path
           description: ID of the race that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RaceFormData'
+              $ref: '#/components/schemas/Race_Dto'
         description: form data object that contains fields to update a specific race in the system
       responses:
         '204':
@@ -837,14 +837,14 @@ paths:
       tags:
         - race
       summary: Deletes a race by ID
-      operationId: deleteRace
+      operationId: delete_Race
       parameters:
         - name: id
           in: path
           description: Race id to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -859,19 +859,19 @@ paths:
         - race-result
       summary: Get a race's results
       description: Get a race's results
-      operationId: getRaceResults
+      operationId: findAllResult_RaceResult
       parameters:
         - name: id
           in: path
           description: ID of the race
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
         - name: classId
           in: query
           description: get results for a specific class on the race
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
@@ -880,7 +880,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/RaceResultRespone'
+                  $ref: '#/components/schemas/RaceResultResponse'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -890,21 +890,21 @@ paths:
         - race
         - race-result
       summary: Add new race results for an existing race
-      operationId: addRaceResult
+      operationId: createResult_RaceResult
       parameters:
         - name: id
           in: path
           description: ID of the race
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/RaceResultFormData'
+                $ref: '#/components/schemas/RaceResult_Dto'
         description: A results array. Each element is a result object.
       responses:
         '200':
@@ -912,7 +912,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RaceResultRespone'
+                $ref: '#/components/schemas/RaceResultResponse'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -924,25 +924,25 @@ paths:
         - race
         - race-result
       summary: Updates an existing race result
-      operationId: updateRaceResult
+      operationId: updateResult_RaceResult
       parameters:
         - name: id
           in: path
           description: ID of the race
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
         - name: raceResultId
           in: path
           description: ID of the result that needs to be updated
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RaceResultFormData'
+              $ref: '#/components/schemas/RaceResult_Dto'
         description: form data object that contains fields to update a specific race result in the system
       responses:
         '204':
@@ -959,21 +959,21 @@ paths:
         - race-result
       summary: Get a result detail by ID
       description: Get a result detail by ID
-      operationId: getRaceResultById
+      operationId: findOne_RaceResult
       parameters:
         - name: id
           in: path
           description: ID of a race result
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RaceResultRespone'
+                $ref: '#/components/schemas/RaceResultResponse'
         '404':
           $ref: '#/components/responses/404NotFound'
         '400':
@@ -982,14 +982,14 @@ paths:
       tags:
         - race-result
       summary: Delete a race result by ID
-      operationId: deleteRaceResult
+      operationId: delete_RaceResult
       parameters:
         - name: id
           in: path
           description: race result ID to delete
           required: true
           schema:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
       responses:
         '204':
           $ref: '#/components/responses/204NoContent'
@@ -1001,7 +1001,7 @@ paths:
 
 components:
   schemas:
-    ClassFormData: # Can be referenced as '#/components/schemas/ClassFormData'
+    Class_Dto: # Can be referenced as '#/components/schemas/Class_Dto'
       type: object
       required:
         - name
@@ -1014,11 +1014,11 @@ components:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/uuidFormat'
-        - $ref: '#/components/schemas/ClassFormData'
+              $ref: '#/components/schemas/uuid'
+        - $ref: '#/components/schemas/Class_Dto'
 
 
-    AddressFormData: # Can be referenced as '#/components/schemas/AddressFormData'
+    Address_Dto: # Can be referenced as '#/components/schemas/Address_Dto'
       type: object
       required:
         - name
@@ -1053,11 +1053,11 @@ components:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/uuidFormat'
-        - $ref: '#/components/schemas/AddressFormData'
+              $ref: '#/components/schemas/uuid'
+        - $ref: '#/components/schemas/Address_Dto'
 
 
-    TeamFormData: # Can be referenced as '#/components/schemas/TeamFormData'
+    Team_Dto: # Can be referenced as '#/components/schemas/Team_Dto'
       type: object
       required:
         - name
@@ -1071,14 +1071,14 @@ components:
           enum: [USA, VietNam]
           example: USA
         businessAddress:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
     Team: # Can be referenced as '#/components/schemas/Team'
       allOf:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/uuidFormat'
-        - $ref: '#/components/schemas/TeamFormData'
+              $ref: '#/components/schemas/uuid'
+        - $ref: '#/components/schemas/Team_Dto'
     TeamResponse: # Can be referenced as '#/components/schemas/TeamResponse'
       type: object
       required:
@@ -1086,7 +1086,7 @@ components:
         - nationality
       properties:
         id:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         name:
           type: string
           example: The Quicksilver
@@ -1106,7 +1106,7 @@ components:
               items:
                 $ref: '#/components/schemas/CarResponse'
 
-    DriverFormData: # Can be referenced as '#/components/schemas/DriverFormData'
+    Driver_Dto: # Can be referenced as '#/components/schemas/Driver_Dto'
       type: object
       required:
         - firstName
@@ -1125,23 +1125,23 @@ components:
         teams:
           type: array
           items:
-            $ref: '#/components/schemas/uuidFormat'
+            $ref: '#/components/schemas/uuid'
         homeAddress:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         managementAddress:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
     Driver: # Can be referenced as '#/components/schemas/Driver'
       allOf:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/uuidFormat'
-        - $ref: '#/components/schemas/DriverFormData'
+              $ref: '#/components/schemas/uuid'
+        - $ref: '#/components/schemas/Driver_Dto'
     DriverResponse: # Can be referenced as '#/components/schemas/DriverResponse'
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         firstName:
           type: string
           example: Barry
@@ -1167,7 +1167,7 @@ components:
               $ref: '#/components/schemas/CarResponse'
 
 
-    CarFormData: # Can be referenced as '#/components/schemas/CarFormData'
+    Car_Dto: # Can be referenced as '#/components/schemas/Car_Dto'
       type: object
       required:
         - name
@@ -1180,7 +1180,7 @@ components:
           type: string
           example: A random car's name
         team:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         make:
           type: string
           example: Ferrari
@@ -1195,7 +1195,7 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         name:
           type: string
           example: A random car's name
@@ -1218,7 +1218,7 @@ components:
               $ref: '#/components/schemas/DriverResponse'
 
 
-    RaceFormData: # Can be referenced as '#/components/schemas/RaceFormData'
+    Race_Dto: # Can be referenced as '#/components/schemas/Race_Dto'
       type: object
       required:
         - name
@@ -1226,27 +1226,27 @@ components:
         name:
           type: string
           example: Le Mans
-    CreatingRaceFormData: # Can be referenced as '#/components/schemas/CreatingRaceFormData'
+    Create_Race_Dto: # Can be referenced as '#/components/schemas/Create_Race_Dto'
       allOf:
-        - $ref: '#/components/schemas/RaceFormData'
+        - $ref: '#/components/schemas/Race_Dto'
         - type: object
           properties:
             results:
               type: array
               items:
-                $ref: '#/components/schemas/RaceResultFormData'
+                $ref: '#/components/schemas/RaceResult_Dto'
     Race: # Can be referenced as '#/components/schemas/Race'
       allOf:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/uuidFormat'
-        - $ref: '#/components/schemas/RaceFormData'
+              $ref: '#/components/schemas/uuid'
+        - $ref: '#/components/schemas/Race_Dto'
     RaceResponse: # Can be referenced as '#/components/schemas/RaceResponse'
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         name:
           type: string
           example: Le Mans
@@ -1255,7 +1255,7 @@ components:
           items:
             $ref: '#/components/schemas/Class'
 
-    RaceResultFormData: # Can be referenced as '#/components/schemas/RaceResultFormData'
+    RaceResult_Dto: # Can be referenced as '#/components/schemas/RaceResult_Dto'
       type: object
       required:
         - car
@@ -1265,14 +1265,14 @@ components:
         - startPosition
       properties:
         car:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         carNumber:
           type: integer
           example: 1
         driver:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         class:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         startPosition:
           type: integer
           format: int32
@@ -1284,11 +1284,11 @@ components:
           type: integer
           format: int32
           example: 3
-    RaceResultRespone: # Can be referenced as '#/components/schemas/RaceResultRespone'
+    RaceResultResponse: # Can be referenced as '#/components/schemas/RaceResultResponse'
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/uuidFormat'
+          $ref: '#/components/schemas/uuid'
         car:
           $ref: '#/components/schemas/CarResponse'
         carNumber:
@@ -1310,7 +1310,7 @@ components:
           type: integer
           example: 3
 
-    uuidFormat: # Can be referenced as '#/components/schemas/uuidFormat'
+    uuid: # Can be referenced as '#/components/schemas/uuid'
       type: string
       format: uuid
       minLength: 36
